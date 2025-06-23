@@ -1,129 +1,164 @@
-body{
-    font-family: sans-serif;
+/* Base styles */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.main-parent {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
 }
 
 .main {
-
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    position: relative;
-    top: 30vh;
-    left: 25vw;
-    height: 50vh;
-    width: 50vw;
-
+  background: white;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 60vw;
+  max-width: 700px;
 }
 
-header h1 {
-
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    color: green;
-    font-size: 1.7em;
-
+.project-title {
+  text-align: center;
+  color: green;
+  font-size: 2rem;
+  margin-bottom: 0.5em;
 }
 
-main h1 {
-
-    position: absolute;
-    left: 50%;
-    top: 15%;
-    transform: translateX(-50%);
-    color: green;
+.slider-title {
+  text-align: center;
+  color: green;
+  font-size: 1.5rem;
+  margin-bottom: 1.5em;
 }
 
 .input-fields {
-
-    position: absolute;
-    top: 40%;
-    left: 17%;
-    font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  font-size: 1.2rem;
+  margin-bottom: 2em;
 }
 
-.min-field {
-    margin-bottom: 1.3vh;
+.input-fields span {
+  display: inline-block;
+  margin-bottom: 0.5em;
 }
 
 .input-fields input {
-    margin-left: 1em;
-    padding: 1.1em;
-    width: 20em;
-    border: transparent;
-    background-color: rgb(153, 152, 152);
-    border-radius: 13px;
+  padding: 1em;
+  padding-left: 0;
+  border-radius: 8px;
+  border: none;
+  background-color: #d3d3d3;
+  font-size: 1.1rem;
+  width: 90%;
 }
 
-.min-field input:nth-of-type(1) {
-    margin-left: 1.25em;
-}
-
+/* Slider styles */
 .slider-container {
-    position: absolute;
-
-    bottom: 10%;
-
-    left: 10%;
-
-    width: 80%;
-
+  position: relative;
+  width: 100%;
+  margin-top: 1em;
+  height: 40px;
 }
-
-
 
 .range-slider {
-
-    position: absolute;
-
-    width: 100%;
-
-    height: 5px;
-
-    background: none;
-
-    pointer-events: none;
-
-    -webkit-appearance: none;
-
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
 }
 
 .range-slider::-webkit-slider-thumb {
-    pointer-events: auto;
+  pointer-events: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #444;
+  cursor: pointer;
+  -webkit-appearance: none;
+  position: relative;
+  z-index: 2;
+}
 
-    width: 20px;
+.slider-track {
+  position: absolute;
+  height: 5px;
+  background-color: #d3d3d3;
+  width: 100%;
+  border-radius: 5px;
+  z-index: 1;
+    background-color: green; /* ← Always green! */
 
-    height: 20px;
+}
 
-    border-radius: 50%;
+.slider-track::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  background-color: green;
+  z-index: 1;
+  border-radius: 5px;
+  width: 50%; /* can be updated dynamically with JS */
+}
 
-    background: #444;
+/* Responsive styles */
+@media (max-width: 768px) {
+  .main {
+    width: 90vw;
+    padding: 1.5em;
+  }
 
-    cursor: pointer;
+  .project-title {
+    font-size: 1.7rem;
+  }
 
-    -webkit-appearance: none;
-    position: relative;
-    z-index: 2;
-    }
-    
-    
-    
-    .slider-track {
-        position: absolute;
-        height: 5px;
-        background-color: #d3d3d3;
-        width: 100%;
-        border-radius: 5px;
-        z-index: 1;
-        }
-        
-        .slider-track::before {
-            content: '';
-            position: absolute;
-            height: 100%;
-            background-color: green;
-            z-index: 1;
-            border-radius: 5px;
-            /* width: 100%; */
-            
-} 
+  .slider-title {
+    font-size: 1.3rem;
+  }
+
+  .input-fields {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .main {
+    width: 95vw;
+    padding: 1em;
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+  }
+
+  .slider-title {
+    font-size: 1.2rem;
+  }
+
+  .input-fields {
+    font-size: 1rem;
+  }
+
+  .input-fields input {
+    font-size: 1rem;
+    padding: 0.8em;
+  }
+
+  .range-slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  .slider-track {
+    height: 6px;
+  }
+}

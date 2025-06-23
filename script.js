@@ -1,54 +1,42 @@
-const minSlider = document.getElementById('min-slider');
-const maxSlider = document.getElementById('max-slider');
-const minPriceInput = document.querySelector('.min-price');
-const maxPriceInput = document.querySelector('.max-price');
-const track = document.querySelector('.slider-track');
+const minSlider = document.getElementById("min-slider");
+const maxSlider = document.getElementById("max-slider");
+const minInput = document.querySelector(".min-price");
+const maxInput = document.querySelector(".max-price");
+const sliderTrack = document.querySelector(".slider-track");
 
-function updateTrack(minVal, maxVal) {
-  const minPercent = (minVal / 10000) * 100;
-  const maxPercent = (maxVal / 10000) * 100;
+let minGap = 1000; // Minimum gap between min and max slider values
+let maxValue = 10000;
 
-  track.style.setProperty('--left', `${minPercent}%`);
-  track.style.setProperty('--right', `${100 - maxPercent}%`);
-  track.style.setProperty(
-    'background',
-    `linear-gradient(to right, #d3d3d3 ${minPercent}%, green ${minPercent}%, green ${maxPercent}%, #d3d3d3 ${maxPercent}%)`
-  );
+
+
+// Update input fields and track fill
+function updateSlider(event) {
+  let minVal = parseInt(minSlider.value);
+  let maxVal = parseInt(maxSlider.value);
+
+  // Prevent overlap
+  if (maxVal - minVal < minGap) {
+    if (event.target === minSlider) {
+      minSlider.value = maxVal - minGap;
+      minVal = maxVal - minGap;
+    } else {
+      maxSlider.value = minVal + minGap;
+      maxVal = minVal + minGap;
+    }
+  }
+
+  minInput.value = minVal;
+  maxInput.value = maxVal;
+
 }
 
-minSlider.addEventListener('input', () => {
-  let minVal = parseInt(minSlider.value);
-  let maxVal = parseInt(maxSlider.value);
+// Fill the slider track between thumbs
 
-  if (minVal > maxVal - 1000) {
-    minVal = maxVal - 1000;
-    minSlider.value = minVal;
-  }
-
-  minPriceInput.value = minVal;
-  maxPriceInput.value = maxVal;
-
-  updateTrack(minVal, maxVal);
-});
-
-maxSlider.addEventListener('input', () => {
-  let minVal = parseInt(minSlider.value);
-  let maxVal = parseInt(maxSlider.value);
-
-  if (maxVal < minVal + 1000) {
-    maxVal = minVal + 1000;
-    maxSlider.value = maxVal;
-  }
-
-  minPriceInput.value = minVal;
-  maxPriceInput.value = maxVal;
-
-  updateTrack(minVal, maxVal);
-});
 
 // Initial setup
-(function init() {
-  minPriceInput.value = minSlider.value;
-  maxPriceInput.value = maxSlider.value;
-  updateTrack(parseInt(minSlider.value), parseInt(maxSlider.value));
-})();
+minInput.value = minSlider.value;
+maxInput.value = maxSlider.value;
+
+// Event listeners
+minSlider.addEventListener("input", updateSlider);
+maxSlider.addEventListener("input", updateSlider);
