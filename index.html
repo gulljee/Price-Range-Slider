@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>Price Range Slider</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="main">
+
+    <header>
+      <h1>My Practice Project</h1>
+    </header>
+
+
+    <main>
+
+      <h1>Price Range Slider</h1>
+
+      <div class="input-fields">
+        <div class="min-field">
+          <span>Minimum Price: </span>
+          <input type="number" class="min-price" readonly>
+        </div>
+        <div class="max-field">
+          <span>Maximum Price: </span>
+          <input type="number" class="max-price" readonly>
+        </div>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-track"></div>
+        <input type="range" min="0" max="10000" value="2500" step="500" id="min-slider" class="range-slider">
+        <input type="range" min="0" max="10000" value="8500" step="500" id="max-slider" class="range-slider">
+      </div>
+
+
+
+    </main>
+
+  </div>
+
+  <script src="script.js">
+    
+  </script>
+
+
+
+</body>
+
+</html>
